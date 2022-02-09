@@ -1,23 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { useReactiveLocalStorage } from './useLocalStorage';
+
+const MyComp = ({ color = 'red' }) => {
+  const [bears, setBears] = useReactiveLocalStorage('bears')
+
+
+  return <div style={{ border: `1px solid ${color}`, width: 300, height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>{bears}<button style={{ display: 'block' }} onClick={() => setBears(+bears + 1)}>Increase bears</button></div>
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '3rem', width: 700 }}>
+      <MyComp />
+      <MyComp color="blue" />
     </div>
   );
 }
